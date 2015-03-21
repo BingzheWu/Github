@@ -157,4 +157,4 @@ double spline(double x,int n,std::vector<double>& X,std::vector<double>& Y)
     return piecewise_hermit(x,n,X,Y,dY);
 }
 
-#endif //__interpolation_H__
+#endif _
