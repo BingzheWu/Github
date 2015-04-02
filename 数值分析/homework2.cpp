@@ -14,9 +14,12 @@ int main()
 {
    //3.1
    int k1=10;
+   std::cout.precision(8);
+   for(k1=1;k1<11;k1++){
    double h1=1.0/(std::pow(10,k1));
    std::cout<<1.0/0.7<<" "<<Foward_dy(0.7,h1,std::log)<<" "<<Center_dy(0.7,h1,std::log)<<
        " "<<tri_dy(0.7,h1,std::log)<<std::endl;
+   }
    //3.2
    int n=11;double h=1.0/(n-1);
    std::cout<<"3.2结果"<<std::endl;
