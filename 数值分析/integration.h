@@ -80,10 +80,10 @@ double auto_fit(double a,double b,int n0,double(*f)(double),double err)
     return T1;
 }
 //二重积分的simposon公式
-double 2_simposon(double a,double b,double c,double d,double(*f)(double double))
-{
-
-}
+//double 2_simposon(double a,double b,double c,double d,double(*f)(double double))
+//{
+   
+//}
 /*广义积分的数值求法*/
 //Gauss_Chebyshev
 //Gauss_Laguerre
