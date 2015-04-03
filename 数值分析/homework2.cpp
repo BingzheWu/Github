@@ -23,7 +23,7 @@ int main()
 /*方便将数据在Latex中制表，作格式化输出*/
    double out1=Foward_dy(0.7,h1,std::log);double out2=Center_dy(0.7,h1,std::log);double out3=tri_dy(0.7,h1,std::log);
    double e1=std::abs(ans-out1),e2=std::abs(ans-out2),e3=std::abs(ans-out3);
-   std::cout<<ans<<'&'<<" 1/10^"<<k1<<'&'<<" "<<out1<<'&'<<" "<<e1<<"& "<<out2<<"& "<<e2<<"& "<<out3<<"& "<<e3<<"\\\\"<<std::endl;
+   std::cout<<ans<<'&'<<" $1/10^"<<k1<<"$&"<<" "<<out1<<'&'<<" "<<e1<<"& "<<out2<<"& "<<e2<<"& "<<out3<<"& "<<e3<<"\\\\"<<std::endl;
    }
    //3.2
    int n=11;double h=1.0/(n-1);
