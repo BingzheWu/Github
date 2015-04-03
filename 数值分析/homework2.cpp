@@ -14,7 +14,7 @@ int main()
 {
    //3.1
    int k1=10;
-   std::cout.precision(8);
+   std::cout.precision(5);
    double ans=1.0/0.7;
    for(k1=1;k1<11;k1++){
    double h1=1.0/(std::pow(10,k1));
