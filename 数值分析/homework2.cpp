@@ -36,7 +36,7 @@ int main()
    }
    ans1=Center_2_dy(X,n,f,test[0],test[n-1],h);
    ans2=implicit(X,n,f,test[0],test[n-1],h);
-   for(int i=1;i!=n-1;i++)
+   for(int i=0;i!=n;i++)
    {
        std::cout<<"i="<<X[i]<<" "<<test[i]<<" "<<ans1[i]<<" "<<ans2[i]<<std::endl;
    }

@@ -37,7 +37,7 @@ std::vector<double> implicit (std::vector<double> X,int n,double(*f)(double),dou
     std::vector<double> a(n),b(n),c(n),ans(n);Matrix z(n,1);
     for(int i=0;i!=n-1;i++){c[i+1]=1;a[i]=4;b[i]=1;}
     for(int i=1;i!=n-1;i++){z[i][0]=3*(f(X[i+1])-f(X[i-1]))/h;z[0][0]=df0;z[n-1][0]=dfn;}
-    a[0]=1;c[1]=0;b[n-2]=0;
+    a[0]=1;c[n-1]=0;b[0]=0;a[n-1]=1;
     tridiagonal(n,a,b,c,z,ans);
     return ans;
     

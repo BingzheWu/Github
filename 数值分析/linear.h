@@ -190,15 +190,19 @@ void tridiagonal(int n,std::vector<double>a,std::vector<double>b,std::vector<dou
     std::vector<double> y(n),u(n);
     y[0]=z[0][0]/a[0];
     u[0]=b[0]/a[0];
+    double l;
     for(int i=1;i!=n-1;i++)
     {
-        double l=a[i]-c[i]*u[i-1];
+        l=a[i]-c[i]*u[i-1];
         y[i]=(z[i][0]-y[i-1]*c[i])/l;
         u[i]=b[i]/l;
     }
-    ans[n-1]=y[n-1];
+    l=a[n-1]-c[n-1]*u[n-2];
+    y[n-1]=(z[n-1][0]-y[n-2]*c[n-1])/l;
+    ans[n-1]=z[n-1][0];
     for(int i=n-2;i!=-1;i--)
     {
         ans[i]=y[i]-u[i]*ans[i+1];
     }
+
 }
