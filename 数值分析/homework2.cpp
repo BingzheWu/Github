@@ -36,9 +36,10 @@ int main()
    }
    ans1=Center_2_dy(X,n,f,test[0],test[n-1],h);
    ans2=implicit(X,n,f,test[0],test[n-1],h);
-   for(int i=0;i!=n;i++)
+   for(int i=1;i!=n-1;i++)
    {
-       std::cout<<"i="<<X[i]<<" "<<test[i]<<" "<<ans1[i]<<" "<<ans2[i]<<std::endl;
+       double e1=std::abs(ans1[i]-test[i]);double e2=std::abs(ans2[i]-test[i]);
+       std::cout<<X[i]<<"& "<<test[i]<<"& "<<ans1[i]<<"& "<<e1<<"& "<<ans2[i]<<"& "<<e2<<"\\\\"<<std::endl;
    }
 
 
