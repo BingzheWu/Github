@@ -26,7 +26,7 @@ int main()
    std::cout<<ans<<'&'<<" $1/10^"<<k1<<"$&"<<" "<<out1<<'&'<<" "<<e1<<"& "<<out2<<"& "<<e2<<"& "<<out3<<"& "<<e3<<"\\\\"<<std::endl;
    }
    //3.2
-   int n=11;double h=1.0/(n-1);
+   int n=91;double h=1.0/(n-1);
    std::cout<<"3.2结果"<<std::endl;
    std::vector<double> test(n),X(n),ans1(n),ans2(n);
    for(int i=0;i!=n;i++)
