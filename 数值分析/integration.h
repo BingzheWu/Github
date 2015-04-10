@@ -80,10 +80,14 @@ double auto_fit(double a,double b,int n0,double(*f)(double),double err)
     return T1;
 }
 //二重积分的simposon公式
-//double 2_simposon(double a,double b,double c,double d,double(*f)(double double))
-//{
+double double_simposon(double a,double b,double c,double d,double x0,double y0,double(*f)(double,double,double,double))
+{
+    double temp=(d-c)*(b-a)/36.0;
+    double tmp1=f(x0,a,y0,c)+4*f(x0,(a+b)/2.0,y0,c)+f(x0,b,y0,c)+4*f(x0,a,y0,(c+d)/2.0)+16*f(x0,(a+b)/2.0,y0,(c+d)/2.0)+4*f(x0,b,y0,(c+d)/2.0)+f(x0,a,y0,d)+4*f(x0,(a+b)/2.0,y0,d)+f(x0,b,y0,d);
+    return temp*tmp1;
+
    
-//}
+}
 /*广义积分的数值求法*/
 //Gauss_Chebyshev
 //Gauss_Laguerre
