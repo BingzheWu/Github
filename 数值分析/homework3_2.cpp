@@ -19,12 +19,14 @@ void output4_2(double a,double b,int maxNum){
         double h=(b-a)/double(n);
         double center=re_mide_point(a,b,h,f);
         cout<<h<<"& "<<Pi<<"& "<<center<<"& "<<abs(center-Pi)<<"\\\\"<<endl;
+        cout<<"\\hline"<<endl;
     }
     cout<<"h&"<<" $\\pi$& "<<"复合梯形&"<<" 误差"<<"\\\\"<<endl;
     for(int n=1;n<maxNum;n=n*10){
         double h=(b-a)/double(n);
         double center=re_trapezoid(a,b,h,f);
         cout<<h<<"& "<<Pi<<"& "<<center<<"& "<<abs(center-Pi)<<"\\\\"<<endl;
+        cout<<"\\hline"<<endl;
     }
     cout<<"h&"<<" $\\pi$& "<<"复合Simposon&"<<" 误差"<<"\\\\"<<endl;
     for(int n=1;n<maxNum;n=n*10){
@@ -32,6 +34,7 @@ void output4_2(double a,double b,int maxNum){
         double h=(b-a)/double(n);
         double center=re_simposon(a,b,h,f);
         cout<<h<<"& "<<Pi<<"& "<<center<<"& "<<abs(center-Pi)<<"\\\\"<<endl;
+        cout<<"\\hline"<<endl;
     }
 
 }
