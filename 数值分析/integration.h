@@ -50,32 +50,35 @@ double re_simposon(double a,double b,double h,double(*f)(double))
     return ans;
 }
 //romberg
-double romberg(double a,double b,double h0,double(*f)(double),double err)
+double romberg(double a,double b,double& h0,double(*f)(double),double err,int& k)
 {
-    int k=1;
+    k=1;
     double T0=0,T1=1;
+    T0=re_trapezoid(a,b,h0,f);
     while(std::abs(T1-T0)>err&&k++)
     {
-        T0=re_trapezoid(a,b,h0,f);
-        h0/=2;
+        h0/=2.0;
         double tmp0=re_trapezoid(a,b,h0,f);
         T1=(tmp0-std::pow(0.25,k)*T0)/(1-std::pow(0.25,k));
+        T0=T1;
         
 
     }
+    
     return T1;
 }
 //自适应方法
-double auto_fit(double a,double b,int n0,double(*f)(double),double err)
+double auto_fit(double a,double b,int& n0,double(*f)(double),double err,int& k)
 {
     double h0=(b-a)/double(n0);
     double T0,T1;
-    int k=1;
-    while(std::abs(T1-3.1415926)>err&&k++)
+    k=1;
+    while(std::abs(T1-T0)>err&&k++)
     {
 
         T1=T0+re_mide_point(a,b,h0,f);
-        h0=h0/2;
+        h0=h0/2.0;
+        T0=T1;
     }
     return T1;
 }
