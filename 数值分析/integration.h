@@ -70,14 +70,14 @@ double romberg(double a,double b,double& h0,double(*f)(double),double err,int& k
 //自适应方法
 double auto_fit(double a,double b,int& n0,double(*f)(double),double err,int& k)
 {
-    double h0=(b-a)/double(n0);
+    long double h0=(b-a)/double(n0);
     double T0,T1;
     k=1;
     while(std::abs(T1-T0)>err&&k++)
     {
-
+        h0=double(b-a)/n0;
         T1=T0+re_mide_point(a,b,h0,f);
-        h0=h0/2.0;
+        n0=2*n0;
         T0=T1;
     }
     return T1;
@@ -88,8 +88,19 @@ double double_simposon(double a,double b,double c,double d,double x0,double y0,d
     double temp=(d-c)*(b-a)/36.0;
     double tmp1=f(x0,a,y0,c)+4*f(x0,(a+b)/2.0,y0,c)+f(x0,b,y0,c)+4*f(x0,a,y0,(c+d)/2.0)+16*f(x0,(a+b)/2.0,y0,(c+d)/2.0)+4*f(x0,b,y0,(c+d)/2.0)+f(x0,a,y0,d)+4*f(x0,(a+b)/2.0,y0,d)+f(x0,b,y0,d);
     return temp*tmp1;
+}
+double CdoubleSimposon(double a,double b,double c,double d,double x0,double y0,double(*f)(double,double ,double,double),double h){
+    int n=(b-a)/h;
+    double ans=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            double tmp1=a+i*h;double tmp2=c+i*h;
+            ans+=double_simposon(tmp1,tmp1+h,tmp2,tmp2+h,x0,y0,f);
+            
+        }
+    }
+    return ans;
 
-   
 }
 /*广义积分的数值求法*/
 //Gauss_Chebyshev

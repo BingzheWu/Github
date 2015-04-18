@@ -53,25 +53,40 @@ void output4_2(double a,double b,long int maxNum){
 
     cout<<"精度& "<<"达到精度步长& "<<"自适应方法调整次数"<<"\\\\"<<endl;
     cout<<"\\hline"<<endl;
-    int n0=10;
+    int n0;
     for(long int n=100;n<maxNum;n=100*n){
+        n0=10;
         long double err0=1.0/n;
-        long double rom=auto_fit(a,b,n0,f,err0,count);
+        double rom=auto_fit(a,b,n0,f,err0,count);
         cout<<err0<<"& "<<1.0/n0<<"& "<<count<<"\\\\"<<endl;
         cout<<"\\hline"<<endl;
     }
     
 }
-
+void output3_9(int n,double a1,double b1,double c1,double d1){
+    double h=8.0/n;
+    double tmp1;
+    double tmp2;
+    double h0=2.0/15;
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++){
+            tmp1=2+i*h;
+            tmp2=2+j*h;
+            cout<<tmp1<<","<<tmp2<<","<<CdoubleSimposon(a1,b1,c1,d1,tmp1,tmp2,f2,h)<<endl;
+        }
+    }
+}
 int main()
 {
     //3.4
     double a=0.0,b=1.0;
     long int  n0=pow(10,15);
-    output4_2(a,b,n0);
+   // output4_2(a,b,n0);
    // output4_1(a,b,10000000);
    //3.9
-   //double a1=-1,b1=1,c1=-1,d1=1;
+   double a1=-1,b1=1,c1=-1,d1=1;
+   output3_9(20,a1,b1,c1,d1);
    // std::cout<<double_simposon(a1,b1,c1,d1,2.0,2.0,f2)<<std::endl;
 
 }
