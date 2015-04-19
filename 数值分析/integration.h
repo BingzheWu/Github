@@ -50,34 +50,36 @@ double re_simposon(double a,double b,double h,double(*f)(double))
     return ans;
 }
 //romberg
-double romberg(double a,double b,double& h0,double(*f)(double),double err,int& k)
-{
-    k=1;
-    double T0=0,T1=1;
-    T0=re_trapezoid(a,b,h0,f);
-    while(std::abs(T1-T0)>err&&k++)
-    {
-        h0/=2.0;
-        double tmp0=re_trapezoid(a,b,h0,f);
-        T1=(tmp0-std::pow(0.25,k)*T0)/(1-std::pow(0.25,k));
-        T0=T1;
-        
-
+double romberg(double a,double b,double h0,double(*f)(double),int step){
+    if(step==1){return re_trapezoid(a,b,h0,f);}
+    else{
+        return ((romberg(a,b,h0/2,f,step - 1) -std::pow(4,-(step-1)) * romberg(a,b,h0,f,step-1)) / (1 - std::pow(4, -(step-1))) );
     }
-    
-    return T1;
+}
+double Romberg(double a,double b,double h0,double(*f)(double),double err,int& k){
+    while(++k){
+        if(std::abs(romberg(a,b,h0,f,k)-romberg(a,b,h0,f,k-1))<err){
+        return romberg(a,b,h0,f,k);
+        break;
+        }
+    }
 }
 //自适应方法
 double auto_fit(double a,double b,int& n0,double(*f)(double),double err,int& k)
 {
-    long double h0=(b-a)/double(n0);
+     double h0=(b-a)/double(n0);
     double T0,T1;
     k=1;
-    while(std::abs(T1-T0)>err&&k++)
+    T1=3;
+    T0=re_trapezoid(a,b,h0,f);
+    while(k++)
     {
         h0=double(b-a)/n0;
-        T1=T0+re_mide_point(a,b,h0,f);
+        double tmp=T1;
+        T1=0.5*T0+0.5*re_mide_point(a,b,h0,f);
         n0=2*n0;
+        if(std::abs(T1-T0)<err){break;}
+        
         T0=T1;
     }
     return T1;
@@ -103,6 +105,23 @@ double CdoubleSimposon(double a,double b,double c,double d,double x0,double y0,d
 
 }
 /*广义积分的数值求法*/
+double infSimpson( double err,long int maxNum, double(*f)( double)){
+     int k0=0;
+     double T0=0,T1=1;
+     while(std::abs(T0-T1)>err&&k0++<maxNum){
+        T0=T1;
+        double a=std::pow(10.0,-k0); double b=std::pow(10.0,k0);
+        double h=(b-a)/1000.0;
+        T1=re_simposon(a,b,h,f);
+     }
+     return T1;
+
+
+}
+double GaussLaguerre(double(*f)(double)){
+    double temp=(2+std::sqrt(2))/4.0;
+    return temp*f(2-std::sqrt(2))+(1-temp)*f(2+std::sqrt(2));
+}
 //Gauss_Chebyshev
 //Gauss_Laguerre
 //Gauss_Hermit
