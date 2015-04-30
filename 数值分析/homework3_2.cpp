@@ -87,7 +87,8 @@ void output3_9(int n,double a1,double b1,double c1,double d1){
 }
 void output3_7(double err,int maxNum){
     cout<<infSimpson(err,maxNum,f3)<<endl;
-    cout<<GaussLaguerre(f3temp)<<endl; 
+    cout<<GaussLaguerre(f3temp)<<endl;
+    cout<<GaussLaguerre3(f3temp)<<endl; 
 
 }
 int main()
@@ -95,12 +96,12 @@ int main()
     //3.4
     double a=0.0,b=1.0;
     long int  n0=pow(10,14);
-    output4_2(a,b,n0);
+   // output4_2(a,b,n0);
    // output4_1(a,b,10000000);
    //3.9
    double a1=-1,b1=1,c1=-1,d1=1;
    //output3_9(20,a1,b1,c1,d1);
-//   output3_7(0.000000001,2);
+   output3_7(0.000000001,2);
    // std::cout<<double_simposon(a1,b1,c1,d1,2.0,2.0,f2)<<std::endl;
 
 }

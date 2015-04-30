@@ -122,6 +122,10 @@ double GaussLaguerre(double(*f)(double)){
     double temp=(2+std::sqrt(2))/4.0;
     return temp*f(2-std::sqrt(2))+(1-temp)*f(2+std::sqrt(2));
 }
+double GaussLaguerre3(double(*f)(double)){
+    return 0.711093*f(0.415755)+0.278518*f(2.29428)+0.0103893*f(6.28995);
+}
+
 //Gauss_Chebyshev
 //Gauss_Laguerre
 //Gauss_Hermit
