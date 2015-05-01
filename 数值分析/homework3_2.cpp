@@ -86,18 +86,25 @@ void output3_9(int n,double a1,double b1,double c1,double d1){
     }
 }
 void output3_7(double err,int maxNum){
-    cout<<infSimpson(err,maxNum,f3)<<endl;
-    cout<<GaussLaguerre(f3temp)<<endl;
-    cout<<GaussLaguerre3(f3temp)<<endl;
     double ans=pow(Pi,4)/15;
     cout<<"\\hline"<<endl;
     cout<<"数值格式& "<<"误差& "<<"计算时间 \\\\"<<endl;
     double t1=clock();
     double Simpson=infSimpson(err,maxNum,f3);
-    cout<<"方法一& "<<abs(Simpson-ans)<<"& "<<(double)(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
+    cout<<"方法一& "<<abs(Simpson-ans)<<"& "<<(double)abs(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
     t1=clock();
-    double Gauss1=GaussLaguerre2(f3temp);
-    cout<<"& "<<abs(Gauss1-ans)<<"& "<<(double)(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
+    double Gauss1=GaussLaguerre(f3temp);
+    cout<<"2次Gauss& "<<abs(Gauss1-ans)<<"& "<<(double)abs(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
+    t1=clock();
+    Gauss1=GaussLaguerre3(f3temp);
+    cout<<"3次Gausss& "<<abs(Gauss1-ans)<<"& "<<(double)abs(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
+    t1=clock();
+    Gauss1=GaussLaguerre4(f3temp);
+    cout<<"4次Gauss& "<<abs(Gauss1-ans)<<"& "<<(double)abs(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
+    t1=clock();
+    Gauss1=GaussLaguerre5(f3temp);
+    cout<<"5次Gauss& "<<abs(Gauss1-ans)<<"& "<<(double)abs(t1-clock())/CLOCKS_PER_SEC<<"\\\\"<<endl<<"\\hline"<<endl;
+
 
 }
 int main()

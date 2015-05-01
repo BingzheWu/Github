@@ -125,7 +125,12 @@ double GaussLaguerre(double(*f)(double)){
 double GaussLaguerre3(double(*f)(double)){
     return 0.711093*f(0.415755)+0.278518*f(2.29428)+0.0103893*f(6.28995);
 }
-
+double GaussLaguerre4(double(*f)(double)){
+    return 0.6031541043*f(0.3225476896)+0.3574186924*f(1.7457611012)+0.0388879085*f(4.5366202969)+0.0005392947*f(9.3950709123);
+}
+double GaussLaguerre5(double(*f)(double)){
+    return 0.5217556106*f(0.2635603197)+0.3986668111*f(1.41340305091)+0.0759424497*f(3.596425771)+0.0036117587*f(7.0858100059)+0.000023370*f(12.640800844);
+}
 //Gauss_Chebyshev
 //Gauss_Laguerre
 //Gauss_Hermit
