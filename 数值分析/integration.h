@@ -79,7 +79,7 @@ double auto_fit(double a,double b,int& n0,double(*f)(double),double err,int& k)
         T1=0.5*T0+0.5*re_mide_point(a,b,h0,f);
         n0=2*n0;
         if(std::abs(T1-T0)<err){break;}
-        
+
         T0=T1;
     }
     return T1;
@@ -98,7 +98,7 @@ double CdoubleSimposon(double a,double b,double c,double d,double x0,double y0,d
         for(int j=0;j<n;j++){
             double tmp1=a+i*h;double tmp2=c+i*h;
             ans+=double_simposon(tmp1,tmp1+h,tmp2,tmp2+h,x0,y0,f);
-            
+
         }
     }
     return ans;
