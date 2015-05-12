@@ -62,7 +62,7 @@ Matrix Broyden(Matrix x0,int max,double eps,Matrix(*f)(Matrix),Matrix(*df)(Matri
         inv0=inv1;
 
     }
-    std::cout<<"迭代次数："<<k<<std::endl;
+    //std::cout<<"迭代次数："<<k<<std::endl;
     return x1;
 }
 #endif// __extract_root__H_
