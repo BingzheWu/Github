@@ -64,30 +64,29 @@ Matrix scheme4(Matrix x0){
     x1[2][0]=f4(x0)[2][0]+x0[2][0];
     return x1;
 }
-void output1(double x0,int max, double eps ){
+void output1(double x0,int max, double eps,double cur ){
 	double x1;
+    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"/hline"<<endl;
 	for ( int i =1;i<max;i++){
 		x1=scheme1(x0);
+        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
 		if(std::abs(x0-x1)<eps){
 			break;
 		}
-		std::cout<<x1<<" ";
 		x0=x1;
 	}
-	std::cout<<std::endl;
 	for ( int i =1;i<max;i++){
 		x1=scheme2(x0);
+        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
 		if(std::abs(x0-x1)<eps){
 			break;
 		}
 		x0=x1;
-		std::cout<<x1<<" ";
 	}
-	std::cout<<std::endl;
 	for(int i=1;i<max;i++){
 		x1=newton_solve(x0,i,eps,f2,df2);
-		std::cout<<x1<<" ";
-	}
+        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
+    }
 }
 void output2(Matrix x0,int max,double eps,Matrix cur){
     Matrix ans(2,1);
@@ -134,8 +133,9 @@ int main()
     x0[1][0]=1.4;
     int max=10;double eps=std::pow(0.1,15);
     //output2(x0,max,eps,cur);
-	//output1(3,6,eps);
-    Matrix x0_1(3,1);
-    x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
-    output3(x0_1,100,eps);
+    double cur1=3.4;
+	output1(3,6,eps,cur1);
+ //   Matrix x0_1(3,1);
+   // x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
+   // output3(x0_1,100,eps);
 }
