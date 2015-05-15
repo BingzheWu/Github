@@ -1,6 +1,7 @@
 #include<iostream>
 #include<cmath>
 #include"extract_root.h"
+using namespace std;
 double f(double x)
 {
     return double(std::pow(x,6)-x-1);
@@ -39,6 +40,18 @@ Matrix df3(Matrix x){
     ans[0][1]=3*(x[0][0]+3)*x[1][0]*x[1][0];
     ans[1][0]=std::cos(x[1][0]*std::exp(x[0][0])-1)*x[1][0]*std::exp(x[0][0]);
     ans[1][1]=std::cos(x[1][0]*std::exp(x[0][0])-1)*std::exp(x[0][0]);
+    return ans;
+}
+//第四题条件
+Matrix f4 (Matrix x){
+    Matrix ans(3,1);
+    ans[0][0]=-cos(x[0][0])/81.0+x[1][0]*x[1][0]/9.0+sin(x[2][0])/3.0-x[0][0];
+    ans[1][0]=sin(x[0][0])/3.0+cos(x[2][0])/3.0-x[1][0];
+    ans[2][0]=-cos(x[0][0])/9.0+x[1][0]/3.0+sin(x[2][0])/6.0-x[2][0]-x[2][0];
+    return ans;
+}
+Matrix df4(Matrix){
+    Matrix ans(3,3);
     return ans;
 }
 void output1(double x0,int max, double eps ){
