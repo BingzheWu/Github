@@ -75,6 +75,7 @@ void output1(double x0,int max, double eps,double cur ){
 		}
 		x0=x1;
 	}
+    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"/hline"<<endl;
 	for ( int i =1;i<max;i++){
 		x1=scheme2(x0);
         cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
@@ -83,6 +84,7 @@ void output1(double x0,int max, double eps,double cur ){
 		}
 		x0=x1;
 	}
+    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"/hline"<<endl;
 	for(int i=1;i<max;i++){
 		x1=newton_solve(x0,i,eps,f2,df2);
         cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
@@ -133,8 +135,8 @@ int main()
     x0[1][0]=1.4;
     int max=10;double eps=std::pow(0.1,15);
     //output2(x0,max,eps,cur);
-    double cur1=3.4;
-	output1(3,6,eps,cur1);
+    double cur1=3.07642116379;
+	output1(3,7,eps,cur1);
  //   Matrix x0_1(3,1);
    // x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
    // output3(x0_1,100,eps);
