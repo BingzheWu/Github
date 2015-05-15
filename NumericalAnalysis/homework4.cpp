@@ -47,12 +47,22 @@ Matrix f4 (Matrix x){
     Matrix ans(3,1);
     ans[0][0]=-cos(x[0][0])/81.0+x[1][0]*x[1][0]/9.0+sin(x[2][0])/3.0-x[0][0];
     ans[1][0]=sin(x[0][0])/3.0+cos(x[2][0])/3.0-x[1][0];
-    ans[2][0]=-cos(x[0][0])/9.0+x[1][0]/3.0+sin(x[2][0])/6.0-x[2][0]-x[2][0];
+    ans[2][0]=-cos(x[0][0])/9.0+x[1][0]/3.0+sin(x[2][0])/6.0-x[2][0];
     return ans;
 }
-Matrix df4(Matrix){
+Matrix df4(Matrix x){
     Matrix ans(3,3);
+    ans[0][0]=sin(x[0][0])/81.0-1;ans[0][1]=2.0/9.0*x[1][0];ans[0][2]=cos(x[2][0])/3.0;
+    ans[1][0]=cos(x[0][0])/3.0;ans[1][1]=-1;ans[1][2]=-sin(x[2][0])/3.0;
+    ans[2][0]=sin(x[0][0])/9.0;ans[2][1]=1.0/3.0;ans[2][2]=cos(x[2][0])/6.0-1;
     return ans;
+}
+Matrix scheme4(Matrix x0){
+    Matrix x1(3,1);
+    x1[0][0]=f4(x0)[0][0]+x0[0][0];
+    x1[1][0]=f4(x0)[1][0]+x0[1][0];
+    x1[2][0]=f4(x0)[2][0]+x0[2][0];
+    return x1;
 }
 void output1(double x0,int max, double eps ){
 	double x1;
@@ -93,6 +103,26 @@ void output2(Matrix x0,int max,double eps,Matrix cur){
         std::cout<<i<<"& "<<Norm_Matrix(ans-cur)<<"& "<<"\\\\"<<std::endl<<"/hline"<<std::endl;
     }
 }
+void output3(Matrix x0,int max,double eps){
+    Matrix ans(3,1);
+    ans=Newton_solve(x0,max,eps,f4,df4);
+    for(int i=0;i<3;i++){
+        cout<<ans[i][0]<<" ";
+    }
+    Matrix x1(3,1);
+    for(int i=1;i<max;i++){
+        x1=scheme4(x0);
+        if( Norm_Matrix(x1-x0)<eps){
+            break;
+        }
+        x0=x1;
+        for(int i=0;i<3;i++){
+            cout<<x1[i][0]<<" ";
+        }
+        std::cout<<endl;
+        
+    }
+}
 
 int main()
 {
@@ -102,5 +132,8 @@ int main()
     x0[1][0]=1.4;
     int max=10;double eps=std::pow(0.1,15);
     //output2(x0,max,eps,cur);
-	output1(3,6,eps);
+	//output1(3,6,eps);
+    Matrix x0_1(3,1);
+    x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
+    output3(x0_1,100,eps);
 }
