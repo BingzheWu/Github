@@ -105,6 +105,8 @@ void output2(Matrix x0,int max,double eps,Matrix cur){
 }
 void output3(Matrix x0,int max,double eps){
     Matrix ans(3,1);
+    Matrix cur(3,1);
+    cur[0][0]=0;cur[1][0]=1/3.0;cur[2][0]=0;
     ans=Newton_solve(x0,max,eps,f4,df4);
     for(int i=0;i<3;i++){
         cout<<ans[i][0]<<" ";
