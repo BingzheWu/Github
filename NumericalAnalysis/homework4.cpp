@@ -66,42 +66,45 @@ Matrix scheme4(Matrix x0){
 }
 void output1(double x0,int max, double eps,double cur ){
 	double x1;
-    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"/hline"<<endl;
+    cout<<"格式1"<<endl;
+    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"\\hline"<<endl;
 	for ( int i =1;i<max;i++){
 		x1=scheme1(x0);
-        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
+        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"\\hline"<<endl;
 		if(std::abs(x0-x1)<eps){
 			break;
 		}
 		x0=x1;
 	}
-    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"/hline"<<endl;
+    cout<<"格式2"<<endl;
+    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"\\hline"<<endl;
 	for ( int i =1;i<max;i++){
 		x1=scheme2(x0);
-        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
+        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"\\hline"<<endl;
 		if(std::abs(x0-x1)<eps){
 			break;
 		}
 		x0=x1;
 	}
-    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"/hline"<<endl;
+    cout<<"牛顿法 "<<endl;
+    cout<<"迭代次数& "<<"相对误差"<<"\\\\"<<endl<<"\\hline"<<endl;
 	for(int i=1;i<max;i++){
 		x1=newton_solve(x0,i,eps,f2,df2);
-        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"/hline"<<endl;
+        cout<<i<<"& "<<abs(x1-cur)<<"\\\\"<<endl<<"\\hline"<<endl;
     }
 }
 void output2(Matrix x0,int max,double eps,Matrix cur){
     Matrix ans(2,1);
-    std::cout<<"/hline"<<std::endl;
-    std::cout<<"迭代次数& "<<"误差& "<<"\\\\"<<std::endl<<"/hline"<<std::endl;
+    std::cout<<"\\hline"<<std::endl;
+    std::cout<<"迭代次数& "<<"误差& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     for (int i=1;i<=max;i++){
         ans=Broyden(x0,i,eps,f3,df3);
-        std::cout<<i<<"& "<<Norm_Matrix(ans-cur)<<"& "<<"\\\\"<<std::endl<<"/hline"<<std::endl;
+        std::cout<<i<<"& "<<Norm_Matrix(ans-cur)<<"& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     }
-    std::cout<<"迭代次数& "<<"误差& "<<"\\\\"<<std::endl<<"/hline"<<std::endl;
+    std::cout<<"迭代次数& "<<"误差& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     for (int i=1;i<=max;i++){
         ans=Newton_solve(x0,i,eps,f3,df3);
-        std::cout<<i<<"& "<<Norm_Matrix(ans-cur)<<"& "<<"\\\\"<<std::endl<<"/hline"<<std::endl;
+        std::cout<<i<<"& "<<Norm_Matrix(ans-cur)<<"& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     }
 }
 void output3(Matrix x0,int max,double eps){
