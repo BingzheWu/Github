@@ -115,6 +115,7 @@ void output3(Matrix x0,int max,double eps){
     cur[0][0]=0;cur[1][0]=1/3.0;cur[2][0]=0;
     ans=Newton_solve(x0,max,eps,f4,df4);
     for(int i=0;i<3;i++){
+        
         cout<<ans[i][0]<<" ";
     }
     Matrix x1(3,1);
@@ -142,7 +143,7 @@ int main()
     output2(x0,max,eps,cur);
     double cur1=3.07642116379;
 	output1(3,7,eps,cur1);
- //   Matrix x0_1(3,1);
-   // x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
-   // output3(x0_1,100,eps);
+    Matrix x0_1(3,1);
+    x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
+    output3(x0_1,100,eps);
 }
