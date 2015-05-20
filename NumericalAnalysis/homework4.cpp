@@ -95,12 +95,14 @@ void output1(double x0,int max, double eps,double cur ){
 }
 void output2(Matrix x0,int max,double eps,Matrix cur){
     Matrix ans(2,1);
+    cout<<"Broyden"<<endl;
     std::cout<<"\\hline"<<std::endl;
     std::cout<<"迭代次数& "<<"误差& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     for (int i=1;i<=max;i++){
         ans=Broyden(x0,i,eps,f3,df3);
         std::cout<<i<<"& "<<Norm_Matrix(ans-cur)<<"& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     }
+    cout<<"牛顿法"<<endl;
     std::cout<<"迭代次数& "<<"误差& "<<"\\\\"<<std::endl<<"\\hline"<<std::endl;
     for (int i=1;i<=max;i++){
         ans=Newton_solve(x0,i,eps,f3,df3);
@@ -137,7 +139,7 @@ int main()
     x0[0][0]=-0.5;
     x0[1][0]=1.4;
     int max=10;double eps=std::pow(0.1,15);
-    //output2(x0,max,eps,cur);
+    output2(x0,max,eps,cur);
     double cur1=3.07642116379;
 	output1(3,7,eps,cur1);
  //   Matrix x0_1(3,1);
