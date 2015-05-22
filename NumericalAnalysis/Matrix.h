@@ -179,16 +179,9 @@ double Norm_Matrix(Matrix A)
         {
             for(int j=0;j!=m;j++)
             {
-               
                     ans+=fabs(A[i][j]);
-              
-              
-
-
             }
-            
         }
-        
         return ans;
    }
 Matrix ones(int n)
