@@ -64,6 +64,18 @@ Matrix scheme4(Matrix x0){
     x1[2][0]=f4(x0)[2][0]+x0[2][0];
     return x1;
 }
+Matrix Scheme4(Matrix x0,int max,double eps){
+    Matrix x1(3,1);
+    for(int i=1;i<max;i++){
+        x1=scheme4(x0);
+        if( Norm_Matrix(x1-x0)<eps){
+            break;
+        }
+        x0=x1;
+    }
+    return x1; 
+
+}
 void output1(double x0,int max, double eps,double cur ){
 	double x1;
     cout<<"格式1"<<endl;
@@ -110,27 +122,27 @@ void output2(Matrix x0,int max,double eps,Matrix cur){
     }
 }
 void output3(Matrix x0,int max,double eps){
-    Matrix ans(3,1);
+    Matrix ans0(3,1);
+    Matrix ans1(3,1);
     Matrix cur(3,1);
     cur[0][0]=0;cur[1][0]=1/3.0;cur[2][0]=0;
-    ans=Newton_solve(x0,max,eps,f4,df4);
-    for(int i=0;i<3;i++){
-        
-        cout<<ans[i][0]<<" ";
+    ans0=Newton_solve(x0,1,eps,f4,df4);
+    cout<<"迭代次数k& "<<"二范数误差\\\\ "<<endl;
+    cout<<"\\hline"<<endl;
+    for (int i = 1;i<max-1;i++){
+        ans1=Newton_solve(x0,i,eps,f4,df4);
+        cout<<i<<"& "<<Norm_Matrix(ans0-cur)<<"\\\\"<<endl<<"\\hline"<<endl;
+        ans0=ans1;
     }
-    Matrix x1(3,1);
-    for(int i=1;i<max;i++){
-        x1=scheme4(x0);
-        if( Norm_Matrix(x1-x0)<eps){
-            break;
-        }
-        x0=x1;
-        for(int i=0;i<3;i++){
-            cout<<x1[i][0]<<" ";
-        }
-        std::cout<<endl;
-        
+    cout<<"迭代次数k& "<<"二范数误差& "<<"$\\dfrac{\\|x_{k+1}-x_*}{x_k-x_*}$\\\\"<<endl;
+    cout<<"\\hline"<<endl;
+    ans0=Scheme4(x0,1,eps);
+    for (int i = 1;i<max-1;i++){
+        ans1=Scheme4(x0,i,eps);
+        cout<<i<<"& "<<Norm_Matrix(ans0-cur)<<"& "<<(Norm_Matrix(ans1-cur))/Norm_Matrix(ans0-cur)<<"\\\\"<<endl<<"\\hline"<<endl;
+        ans0=ans1;
     }
+        
 }
 
 int main()
@@ -145,5 +157,5 @@ int main()
 	output1(3,7,eps,cur1);
     Matrix x0_1(3,1);
     x0_1[0][0]=x0_1[1][0]=x0_1[2][0]=1.0;
-    output3(x0_1,100,eps);
+    output3(x0_1,50,eps);
 }
