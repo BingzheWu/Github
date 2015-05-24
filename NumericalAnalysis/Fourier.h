@@ -17,17 +17,11 @@ void inverse(int& n)
         n+=temp[j]*std::pow(2,temp.size()-j-1);
 
     }
-    
 
 }
 void FFT(std::vector<std::complex<double> > a)
 {
     int N=a.size();
     std::vector<std::complex<double> >temp;
-    
-    
-
-
-
 }
 #endif
