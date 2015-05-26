@@ -1,7 +1,7 @@
 #ifndef __Fourier_H__
 #define __Fourier_H__
-#include "Matrix.h"
 #include<cmath>
+#include<vector>
 #include<complex>
 #define pi 3.141592653
 using namespace std;
@@ -24,6 +24,36 @@ int inverse(int n)
     return ans;
 
 }
+vector<complex<double> > dot(vector<complex<double> > a,complex<double> b){
+    vector<complex<double> > ans;ans.resize(a.size());
+    for (int i=0;i<a.size();i++){
+        ans[i]=b*a[i];
+    }
+    return ans;
+}
+void FFT1(std::vector<std::complex<double> >& InData,vector<complex<double> >& OutData,int lenth,int sign){
+    vector<complex<double> > EvenData;EvenData.resize(lenth/2);
+    vector<complex<double> > EvenResult;EvenResult.resize(lenth/2);
+    vector<complex<double> > OddData;OddData.resize(lenth/2);
+    vector<complex<double> > OddResult;OddResult.resize(lenth/2);
+        int i,j;
+        if(lenth==1){
+            OutData[0]=InData[0]/complex<double>(lenth,0);
+            return;
+        }
+        for(i=0;i<lenth/2;i++){
+            EvenData[i]=InData[2*i];
+            OddData[i]=InData[2*i+1];
+        }
+        FFT1(EvenData,EvenResult,lenth/2,sign);
+        FFT1(OddData,EvenResult,lenth/2,sign);
+        for(i=0;i<lenth/2;i++){
+                OutData[i]=EvenData[i]+OddData[i]*complex<double>(cos(2*pi*i/lenth),sin(sign*2*pi*i/lenth));
+                OutData[i+lenth/2]=EvenData[i]- OddData[i]*complex<double>(cos(2*pi*i/lenth),sin(sign*2*pi*i/lenth));
+         }
+        return;
+   
+}
 void FFT(std::vector<std::complex<double> >& InData,vector<complex<double> >& OutData,int lenth,int sign)
 {
     vector<complex<double> > LData;LData.resize(lenth/2);
@@ -45,12 +75,21 @@ void FFT(std::vector<std::complex<double> >& InData,vector<complex<double> >& Ou
         LData[i]=LData[i]+RData[i];
         RData[i]=(temp-RData[i])* complex<double>(cos(2*pi*i/lenth),sin(sign*2*pi*i/lenth));
     }
-    FFT(LData,LResult,lenth/2,sign);
-    FFT(RData,RResult,lenth/2,sign);
+        FFT(LData,LResult,lenth/2,sign);
+        FFT(RData,RResult,lenth/2,sign);
+    /*
+    if(sign==-1){
+        for (int j=0;j<LResult.size();j++){
+            LResult[j]=LResult[j]/complex<double>(LResult.size(),0);
+            RResult[j]=RResult[j]/complex<double>(RResult.size(),0);
+        }
+    }
+    */
     for(i=0;i<lenth/2;i++){
         OutData[2*i]=LResult[i];
         OutData[2*i+1]=RResult[i];
     }
+    
     return; 
 
 

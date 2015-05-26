@@ -10,18 +10,25 @@ vector<complex<double> > initData3(int n){
     vector<complex<double> > ans;
     ans.resize(n);
     for(int i=0;i<n;i++){
-        ans[i]=f3(2*i*pi/n);
+        ans[i].real(f3(2*i*pi/n));
+        ans[i].imag(0);
     }
     return ans; 
 }
 void output1(int n){
-    vector<complex<double> > inData,outData;
-    inData.resize(n);outData.resize(n);
+    vector<complex<double> > inData,inData0,outData,outData1;
+    inData.resize(n);outData.resize(n);outData1.resize(n);
+    inData0=initData3(n);
     inData=initData3(n);
-    int sign=1;
-    FFT(inData,outData,n,sign);
+    FFT(inData,outData,n,-1);
+/*
+    for (int i=100;i<256-100;i++){
+       outData[i]=0;
+    } 
+*/
+    FFT(outData,outData1,n,1);
     for (int i =0;i<n;i++){
-        cout<<real(outData[i])<<endl;
+        cout<<real((inData0[i]))<<"==========="<<real((outData1[i]))/256<<endl;
     }
 }
 int main(){
