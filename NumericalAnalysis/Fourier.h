@@ -83,7 +83,19 @@ void FFT(std::vector<std::complex<double> >& InData,vector<complex<double> >& Ou
     }
     
     return; 
-
-
+}
+vector<complex<double> > CyclicMatrixSolve(vector<complex<double> > c,vector<complex<double> > b,int length){
+    vector<complex<double> > ans,temp;ans.resize(length);temp.resize(length);
+    FFT(b,temp,length,-1);
+    FFT(c,ans,length,-1);
+    for (int i=0;i<length;i++){
+        ans[i]=temp[i]/ans[i];
+    }
+    temp=ans;
+    FFT(temp,ans,length,1);
+    for(int i=0;i<length;i++){
+        ans[i]=ans[i]/complex<double>(length,0);
+    }
+    return ans;
 }
 #endif

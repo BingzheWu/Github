@@ -16,6 +16,27 @@ vector<complex<double> > initData3(int n){
     return ans; 
 }
 void output1(int n){
+    //init data
+    vector<complex<double> > c,b;c.resize(n);b.resize(n);
+    for ( int i=0;i<n;i++){
+        b[i]=1;
+        if (i==0){
+            c[i]=4;
+        }
+        else if (i==n-1||i==1){
+            c[i]=-1;
+        }
+        else{
+            c[i]=0;
+        }
+    }
+    vector<complex<double> > ans;ans.resize(n);
+    ans=CyclicMatrixSolve(c,b,n);
+    for (int j=0;j<n;j++){
+        std::cout<<ans[j].real()<<endl;
+    }
+}
+void output3(int n){
     vector<complex<double> > inData,inData0,outData,outData1;
     inData.resize(n);outData.resize(n);outData1.resize(n);
     inData0=initData3(n);
@@ -33,6 +54,8 @@ void output1(int n){
 }
 int main(){
     int lenth=256;
-    output1(lenth);
+//    output3(lenth);
+    int length= pow(2,10);
+    output1(length);
 
 }
