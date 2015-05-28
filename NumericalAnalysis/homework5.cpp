@@ -21,14 +21,14 @@ void output1(int n){
     inData0=initData3(n);
     inData=initData3(n);
     FFT(inData,outData,n,-1);
-/*
-    for (int i=100;i<256-100;i++){
+
+    for (int i=6;i<251;i++){
        outData[i]=0;
     } 
-*/
+
     FFT(outData,outData1,n,1);
     for (int i =0;i<n;i++){
-        cout<<real((inData0[i]))<<"==========="<<real((outData1[i]))/256<<endl;
+        cout<<real((inData0[i]))<<","<<real((outData1[i]))/256<<endl;
     }
 }
 int main(){

@@ -77,14 +77,6 @@ void FFT(std::vector<std::complex<double> >& InData,vector<complex<double> >& Ou
     }
         FFT(LData,LResult,lenth/2,sign);
         FFT(RData,RResult,lenth/2,sign);
-    /*
-    if(sign==-1){
-        for (int j=0;j<LResult.size();j++){
-            LResult[j]=LResult[j]/complex<double>(LResult.size(),0);
-            RResult[j]=RResult[j]/complex<double>(RResult.size(),0);
-        }
-    }
-    */
     for(i=0;i<lenth/2;i++){
         OutData[2*i]=LResult[i];
         OutData[2*i+1]=RResult[i];
