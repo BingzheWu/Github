@@ -1,6 +1,7 @@
 #include "Fourier.h"
 #include<cmath>
 #include<iostream>
+#include<ctime>
 #define pi 3.141592653
 using namespace std;
 double f3(double t){
@@ -36,6 +37,28 @@ void output1(int n){
         std::cout<<ans[j].real()<<endl;
     }
 }
+void output2(int n,int M,int Q){
+    //init data
+    vector<complex<double> > x,h;x.resize(n);h.resize(n);
+    for(int i=0;i<n;i++){
+        if(i<Q&&i>0){
+            x[i]=sin(i/2.0);
+            h[i]=exp(1.0/double(i));
+        }
+        else if(i>=Q&&i<M){
+            x[i]=sin(i/2.0);
+            h[i]=0;
+        }
+        else{
+            x[i]=h[i]=0;
+        }
+    }
+    vector<complex<double> >ansFFT=ConcolutionFFT(h,x,n);
+    vector<complex<double> >ans=Concolution(h,x,n);
+    for(int i=0;i<n;i++){
+        cout<<ansFFT[i].real()<<"  "<<ans[i].real()<<endl;
+    }
+}
 void output3(int n){
     vector<complex<double> > inData,inData0,outData,outData1;
     inData.resize(n);outData.resize(n);outData1.resize(n);
@@ -56,6 +79,8 @@ int main(){
     int lenth=256;
 //    output3(lenth);
     int length= pow(2,10);
-    output1(length);
+    //output1(length);
+    int length2=1024;
+    output2(length2,200,500);
 
 }

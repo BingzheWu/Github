@@ -24,10 +24,10 @@ int inverse(int n)
     return ans;
 
 }
-vector<complex<double> > dot(vector<complex<double> > a,complex<double> b){
+vector<complex<double> > dot(vector<complex<double> > a,vector<complex<double> > b){
     vector<complex<double> > ans;ans.resize(a.size());
     for (int i=0;i<a.size();i++){
-        ans[i]=b*a[i];
+        ans[i]=b[i]*a[i];
     }
     return ans;
 }
@@ -94,6 +94,33 @@ vector<complex<double> > CyclicMatrixSolve(vector<complex<double> > c,vector<com
     temp=ans;
     FFT(temp,ans,length,1);
     for(int i=0;i<length;i++){
+        ans[i]=ans[i]/complex<double>(length,0);
+    }
+    return ans;
+}
+vector<complex<double> > Concolution(vector<complex<double> > a,vector<complex<double> > b,int length){
+    vector<complex<double> > ans;ans.resize(length);
+    complex<double> temp;
+    for (int i=0;i<length;i++){
+        for(int j=0;j<length;j++){
+            if ((i-j)<0){
+                ans[i]+=a[j]*b[i-j+length];
+            }
+            else{
+                ans[i]+=a[j]*b[i-j];
+            }
+        }
+    }
+    return ans;
+}
+vector<complex<double> > ConcolutionFFT(vector<complex<double> > a,vector<complex<double> > b,int length){
+    vector<complex<double> >ans;ans.resize(length);
+    vector<complex<double> > temp1,temp2;temp1.resize(length);temp2.resize(length);
+    FFT(a,temp1,length,-1);
+    FFT(b,temp2,length,-1);
+    temp1=dot(temp1,temp2);
+    FFT(temp1,ans,length,1);
+    for (int i=0;i<length;i++){
         ans[i]=ans[i]/complex<double>(length,0);
     }
     return ans;
