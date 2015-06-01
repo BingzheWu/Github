@@ -1,7 +1,10 @@
 #include "Fourier.h"
+#include "linear.h"
+#include "Matrix.h"
 #include<cmath>
 #include<iostream>
 #include<ctime>
+#include<iomanip>
 #define pi 3.141592653
 using namespace std;
 double f3(double t){
@@ -16,7 +19,7 @@ vector<complex<double> > initData3(int n){
     }
     return ans; 
 }
-void output1(int n){
+void output1(int n,int n1){
     //init data
     vector<complex<double> > c,b;c.resize(n);b.resize(n);
     for ( int i=0;i<n;i++){
@@ -32,10 +35,27 @@ void output1(int n){
         }
     }
     vector<complex<double> > ans;ans.resize(n);
-    ans=CyclicMatrixSolve(c,b,n);
-    for (int j=0;j<n;j++){
-        std::cout<<ans[j].real()<<endl;
+    Matrix A(n1,n1),b1(n1,1),x(n1,1);
+    for (int i=0;i<n1;i++){
+        A[i][i]=4;
+        b1[i][0]=1;
+        if (i+1<n1){A[i][i+1]=A[i+1][i]=-1.0;}
     }
+    A[0][n1-1]=A[n1-1][0]=-1.0;
+    //solve problem
+    double startTime=clock();
+    PCG(x,A,b1,10,0.000000000001,n1);
+    double PCGtime=(clock()-startTime)/CLOCKS_PER_SEC;
+    startTime=clock();
+    ans=CyclicMatrixSolve(c,b,n);
+    double FFTtime=(clock()-startTime)/CLOCKS_PER_SEC;
+//    cout<<n<<"& "<<FFTtime<<"& "<<PCGtime<<"\\\\"<<endl<<"\\hline"<<endl;
+    cout<<n<<","<<FFTtime<<","<<PCGtime<<endl;
+    /*
+    for (int j=0;j<n1;j++){
+        std::cout<<ans[j].real()<<"==="<<x[j][0]<<endl;
+    }
+    */
 }
 void output2(int n,int M,int Q){
     //init data
@@ -53,11 +73,19 @@ void output2(int n,int M,int Q){
             x[i]=h[i]=0;
         }
     }
+    double startTime=clock();
     vector<complex<double> >ansFFT=ConcolutionFFT(h,x,n);
+    double endTime=clock();
+    cout<<"FFT卷积时间 "<<(endTime-startTime)/CLOCKS_PER_SEC<<endl;
+    startTime=clock();
     vector<complex<double> >ans=Concolution(h,x,n);
+    endTime=clock();
+    cout<<"普通卷积时间 "<<(endTime-startTime)/CLOCKS_PER_SEC<<endl;
+    /*
     for(int i=0;i<n;i++){
         cout<<ansFFT[i].real()<<"  "<<ans[i].real()<<endl;
     }
+    */
 }
 void output3(int n){
     vector<complex<double> > inData,inData0,outData,outData1;
@@ -79,8 +107,12 @@ int main(){
     int lenth=256;
 //    output3(lenth);
     int length= pow(2,10);
-    //output1(length);
+    output1(length,400);
+    for (int MatrixSize=2;MatrixSize<length+1;MatrixSize=MatrixSize*2){
+        output1(MatrixSize,MatrixSize);
+    
+    }
     int length2=1024;
-    output2(length2,200,500);
+    //output2(length2,200,500);
 
 }

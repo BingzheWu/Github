@@ -206,3 +206,27 @@ void tridiagonal(int n,std::vector<double>a,std::vector<double>b,std::vector<dou
     }
 
 }
+void PCG(Matrix& x0,Matrix A,Matrix b,int max,double eps,int N){
+    int k=0;Matrix p(N,1);
+    double beta;double rho1;
+    Matrix r = b - A*x0;
+    double  rho0=(trans(r)*r)[0][0];
+    while(std::sqrt(std::abs(rho0))>eps*Norm_Matrix(b) && k <max){
+        k=k+1;
+        if(k==1){
+            p=r;
+        }
+        else{
+            beta=rho0/rho1;
+            p=r+beta*p;
+        }
+        Matrix omega=A*p;double alpha =rho0/((trans(p)*omega)[0][0]);x0=x0+alpha*p;
+        r=r-alpha*omega;rho1=rho0;rho0=(trans(r)*r)[0][0];
+    
+    }
+
+
+
+
+
+}
