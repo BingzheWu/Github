@@ -1,4 +1,4 @@
-#-*-coding:utf-8-*-
+#-*-coding=utf-8
 from pylab import *
 import math
 def initData(r):
@@ -14,8 +14,8 @@ def initData(r):
     return x0_values,y0_values,y1_values
 def showData(r):
     x0_values,y0_values,y1_values=initData(r)
-    plot (x0_values,y0_values,label=u"1")
-    plot(x0_values,y1_values,'r+',label=u"2")
+    plot (x0_values,y0_values,label=u"before fft")
+    plot(x0_values,y1_values,'r+',label=u"after fft")
     legend()
     xlabel('t')
     ylabel('y(t)')

@@ -57,7 +57,10 @@ void output1(int n,int n1){
     }
     */
 }
-void output2(int n,int M,int Q){
+void output2( int n,int M,int Q){
+   // int k=std::log(M+Q-1)/std::log(2);
+   // int n=std::pow(2,k+1);
+    //std::cout<<n<<endl; 
     //init data
     vector<complex<double> > x,h;x.resize(n);h.resize(n);
     for(int i=0;i<n;i++){
@@ -75,17 +78,19 @@ void output2(int n,int M,int Q){
     }
     double startTime=clock();
     vector<complex<double> >ansFFT=ConcolutionFFT(h,x,n);
-    double endTime=clock();
-    cout<<"FFT卷积时间 "<<(endTime-startTime)/CLOCKS_PER_SEC<<endl;
+    double FFTtime=(clock()-startTime)/CLOCKS_PER_SEC;
+   // cout<<"FFT卷积时间 "<<(endTime-startTime)/CLOCKS_PER_SEC<<endl;
     startTime=clock();
     vector<complex<double> >ans=Concolution(h,x,n);
-    endTime=clock();
-    cout<<"普通卷积时间 "<<(endTime-startTime)/CLOCKS_PER_SEC<<endl;
+    double Contime=(clock()-startTime)/CLOCKS_PER_SEC;
+    cout<<n<<","<<FFTtime<<","<<Contime<<endl;
+    //cout<<"普通卷积时间 "<<(endTime-startTime)/CLOCKS_PER_SEC<<endl;
     /*
     for(int i=0;i<n;i++){
         cout<<ansFFT[i].real()<<"  "<<ans[i].real()<<endl;
     }
     */
+    
 }
 void output3(int n){
     vector<complex<double> > inData,inData0,outData,outData1;
@@ -106,13 +111,13 @@ void output3(int n){
 int main(){
     int lenth=256;
 //    output3(lenth);
-    int length= pow(2,10);
-    output1(length,400);
-    for (int MatrixSize=2;MatrixSize<length+1;MatrixSize=MatrixSize*2){
-        output1(MatrixSize,MatrixSize);
+ //   int length= pow(2,10);
+   // output1(length,400);
+   // for (int MatrixSize=2;MatrixSize<length+1;MatrixSize=MatrixSize*2){
+     //   output1(MatrixSize,MatrixSize);
     
+    //}
+    for (int size=2;size<5000;size=size*2){
+        output2(size,size/3,size/3);
     }
-    int length2=1024;
-    //output2(length2,200,500);
-
 }

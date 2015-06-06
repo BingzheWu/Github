@@ -16,7 +16,7 @@ def initData(r):
 def plotTime(r):
     size,FFTtime,PCGtime=initData(r)
     plot(size,FFTtime,'r',label=u'FFT')
-    plot(size,PCGtime,'b',label=u'PCG')
+    plot(size,PCGtime,'b',label=u'Normal')
     legend()
     xlabel('MatrixSize')
     ylabel('time')
